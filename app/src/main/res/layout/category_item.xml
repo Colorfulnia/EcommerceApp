@@ -19,7 +19,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:contentDescription="@string/category_image"
-            app:srcCompat="@drawable/ic_placeholder" />
+            app:srcCompaimt="@drawable/ic_placeholder" />
 
         <TextView
             android:id="@+id/textViewCategory"
