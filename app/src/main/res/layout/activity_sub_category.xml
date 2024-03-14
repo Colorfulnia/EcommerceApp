@@ -1,0 +1,34 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SubCategoryActivity">
+
+    <!-- Toolbar for the Sub-Category screen -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarSubCategory"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Sub Category"
+        app:titleTextColor="@android:color/white"
+        app:navigationIcon="?attr/homeAsUpIndicator"/>
+
+    <!-- RecyclerView for displaying sub-category items -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewItems"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="4dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/toolbarSubCategory"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/subcategory_item" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
