@@ -32,8 +32,6 @@ class SubCategoryActivity : AppCompatActivity() {
         val items = fetchDataForSubCategory()
 
         adapter = SubCategoryAdapter(items) { subCategoryItem ->
-            // Handle 'Add to Cart' clicked, for example:
-            // Add subCategoryItem to the cart, show a toast, etc.
         }
 
         binding.recyclerViewItems.adapter = adapter

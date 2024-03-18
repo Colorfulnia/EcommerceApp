@@ -18,14 +18,14 @@
         app:contentInsetEnd="0dp"
         app:contentInsetRight="0dp">
 
-        <TextView
-            android:id="@+id/toolbarTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="SUPER CART"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textColor="@android:color/white" />
+<!--        <TextView-->
+<!--            android:id="@+id/toolbarTitle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:text="SUPER CART"-->
+<!--            android:textAppearance="?attr/textAppearanceHeadline6"-->
+<!--            android:textColor="@android:color/white" />-->
 
         <ImageButton
             android:id="@+id/btnMenu"

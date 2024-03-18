@@ -2,19 +2,25 @@ package com.tao.phonewebdemo
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.tao.phonewebdemo.databinding.ActivityMainBinding
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.tao.phonewebdemo.model.Category
+import com.tao.phonewebdemo.network.ApiServiceImpl
+import com.tao.phonewebdemo.presenter.CategoryPresenter
+import com.tao.phonewebdemo.view.CategoryView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CategoryView {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var categoryAdapter: CategoryAdapter
+    private lateinit var presenter: CategoryPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,55 +30,25 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.title = "Super Cart"
 
-        setupCategoryRecyclerView()
-    }
-
-    private fun setupCategoryRecyclerView() {
-        binding.recyclerViewCategories.layoutManager = GridLayoutManager(this, 2) // Sets up a grid with 2 columns
-        categoryAdapter = CategoryAdapter(fetchCategories()) { category ->
-            // TODO: Replace with actual category click handling
+        categoryAdapter = CategoryAdapter(mutableListOf()) { category ->
             val intent = Intent(this, SubCategoryActivity::class.java)
+            intent.putExtra("category_id", category.category_id)
             startActivity(intent)
         }
+
+        binding.recyclerViewCategories.layoutManager = GridLayoutManager(this, 2)
         binding.recyclerViewCategories.adapter = categoryAdapter
+
+        presenter = CategoryPresenter(this, ApiServiceImpl(this))
+        presenter.loadCategories()
     }
 
-    private fun fetchCategories(): List<Category> {
-        // Dummy data
-        return listOf(
-            Category("1", "Smart Phones"),
-            Category("2", "Laptops"),
-            // Add categories
-        )
-    }
-}
-
-data class Category(
-    val id: String,
-    val name: String
-)
-
-class CategoryAdapter(
-    private val categories: List<Category>,
-    private val onCategoryClicked: (Category) -> Unit
-) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.category_item, parent, false)
-        return CategoryViewHolder(view)
+    override fun showCategories(categories: List<Category>) {
+        categoryAdapter.updateCategories(categories)
     }
 
-    override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
-        val category = categories[position]
-        holder.bind(category, onCategoryClicked)
-    }
-
-    override fun getItemCount(): Int = categories.size
-
-    class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(category: Category, onCategoryClicked: (Category) -> Unit) {
-            itemView.findViewById<TextView>(R.id.textViewCategory).text = category.name
-            itemView.setOnClickListener { onCategoryClicked(category) }
-        }
+    override fun showError(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 }
+

@@ -8,5 +8,14 @@
     <string name="reenter_password_hint">Re-Input the password</string>menu_button
     <string name="menu_button">open the toolbox</string>
     <string name="item_price_format">$%1$.2f</string>
+    <string name="agree_to_terms">User Agreement</string>
+    <string name="register">Register</string>
+    <string name="add_to_cart">Add to Chart</string>
+
+    <string name="category_image">Category Image</string>
+    <string name="category_name">Category Name</string>
+    <string name="product_image">Product Image</string>
+    <string name="item_name">Item Name</string>
+    <string name="item_price">Item Price</string>
 
 </resources>
