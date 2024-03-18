@@ -1,20 +1,50 @@
 package com.tao.phonewebdemo
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.tao.phonewebdemo.databinding.ActivitySubCategoryBinding
+import com.tao.phonewebdemo.model.SubCategoryItem
 
-class SubCategory : AppCompatActivity() {
+class SubCategoryActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySubCategoryBinding
+    private lateinit var adapter: SubCategoryAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_sub_category)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        binding = ActivitySubCategoryBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setupToolbar()
+        setupRecyclerView()
+    }
+
+    private fun setupToolbar() {
+        setSupportActionBar(binding.toolbarSubCategory)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        binding.toolbarSubCategory.setNavigationOnClickListener {
+            onBackPressed()
         }
+    }
+
+    private fun setupRecyclerView() {
+        binding.recyclerViewItems.layoutManager = LinearLayoutManager(this)
+        val items = fetchDataForSubCategory()
+
+        adapter = SubCategoryAdapter(items) { subCategoryItem ->
+            // Handle 'Add to Cart' clicked, for example:
+            // Add subCategoryItem to the cart, show a toast, etc.
+        }
+
+        binding.recyclerViewItems.adapter = adapter
+    }
+
+    private fun fetchDataForSubCategory(): List<SubCategoryItem> {
+
+        return emptyList()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 }

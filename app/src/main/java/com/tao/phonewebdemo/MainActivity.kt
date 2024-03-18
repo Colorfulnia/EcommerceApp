@@ -2,66 +2,77 @@ package com.tao.phonewebdemo
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tao.phonewebdemo.databinding.ActivityMainBinding
-
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var categoryAdapter: CategoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.title = "Super Cart"
 
-        val menuButton = ImageButton(this).apply {
-            setImageResource(R.drawable.ic_menu)
-            setBackgroundResource(R.attr.selectableItemBackgroundBorderless)
-            setOnClickListener {
-                showBottomSheetMenu()
-            }
-        }
-
-        binding.toolbar.addView(menuButton)
+        setupCategoryRecyclerView()
     }
 
-    private fun showBottomSheetMenu() {
-        val bottomSheetDialog = BottomSheetDialog(this)
-        val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_menu, null)
-        bottomSheetDialog.setContentView(sheetView)
-
-        sheetView.findViewById<Button>(R.id.btnLogin).setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
-            bottomSheetDialog.dismiss()
+    private fun setupCategoryRecyclerView() {
+        binding.recyclerViewCategories.layoutManager = GridLayoutManager(this, 2) // Sets up a grid with 2 columns
+        categoryAdapter = CategoryAdapter(fetchCategories()) { category ->
+            // TODO: Replace with actual category click handling
+            val intent = Intent(this, SubCategoryActivity::class.java)
+            startActivity(intent)
         }
-
-        sheetView.findViewById<Button>(R.id.btnRegister).setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
-            bottomSheetDialog.dismiss()
-        }
-
-        bottomSheetDialog.show()
+        binding.recyclerViewCategories.adapter = categoryAdapter
     }
 
-    val loginButton: Button = findViewById(R.id.loginButton)
-    loginButton.setOnClickListener {
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
+    private fun fetchCategories(): List<Category> {
+        // Dummy data
+        return listOf(
+            Category("1", "Smart Phones"),
+            Category("2", "Laptops"),
+            // Add categories
+        )
+    }
+}
+
+data class Category(
+    val id: String,
+    val name: String
+)
+
+class CategoryAdapter(
+    private val categories: List<Category>,
+    private val onCategoryClicked: (Category) -> Unit
+) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.category_item, parent, false)
+        return CategoryViewHolder(view)
     }
 
-    val registerButton: Button = findViewById(R.id.registerButton)
-    registerButton.setOnClickListener {
-        val intent = Intent(this, RegisterActivity::class.java)
-        startActivity(intent)
+    override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
+        val category = categories[position]
+        holder.bind(category, onCategoryClicked)
+    }
+
+    override fun getItemCount(): Int = categories.size
+
+    class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(category: Category, onCategoryClicked: (Category) -> Unit) {
+            itemView.findViewById<TextView>(R.id.textViewCategory).text = category.name
+            itemView.setOnClickListener { onCategoryClicked(category) }
+        }
     }
 }

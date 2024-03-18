@@ -7,5 +7,6 @@
     <string name="password_hint">comes up a password</string>
     <string name="reenter_password_hint">Re-Input the password</string>menu_button
     <string name="menu_button">open the toolbox</string>
+    <string name="item_price_format">$%1$.2f</string>
 
 </resources>
