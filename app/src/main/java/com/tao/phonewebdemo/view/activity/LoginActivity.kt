@@ -6,16 +6,48 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.tao.phonewebdemo.R
+import android.content.Context
+import android.content.SharedPreferences
+import android.widget.Toast
+import com.tao.phonewebdemo.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityLoginBinding
+    private lateinit var sharedPreferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_login)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        initPref()
+
+        binding.login.setOnClickListener {
+            fetchDetails()
         }
+
+        binding.signUp1.setOnClickListener {
+
+        }
+    }
+
+    private fun fetchDetails() {
+        val email = binding.email.text.toString()
+        val password = binding.password.text.toString()
+
+        val emailVerf = sharedPreferences.getString("email", "")
+        val passVerf = sharedPreferences.getString("pass", "")
+
+        if (email == emailVerf && password == passVerf) {
+            //  like startActivity(Intent(this, MainActivity::class.java))
+            Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
+        } else {
+            binding.email.text?.clear()
+            binding.password.text?.clear()
+            Toast.makeText(this, "Incorrect Details", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun initPref() {
+        sharedPreferences = getSharedPreferences("Login Details", Context.MODE_PRIVATE)
     }
 }

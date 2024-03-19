@@ -1,21 +1,57 @@
 package com.tao.phonewebdemo.view.activity
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.tao.phonewebdemo.R
+import com.tao.phonewebdemo.databinding.ActivityRegisterBinding
+
 
 class RegisterActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityRegisterBinding
+    private lateinit var sharedPreferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_register)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        initPref()
+
+        binding.register.setOnClickListener {
+            getDetails()
         }
+
+        binding.login1.setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun getDetails() {
+        val email = binding.email.text.toString()
+        val name = binding.name.text.toString()
+        val pass = binding.password.text.toString()
+        val repass = binding.repassword.text.toString()
+        if (pass == repass) {
+            with(sharedPreferences.edit()) {
+                clear()
+                putString("email", email)
+                putString("name", name)
+                putString("pass", pass)
+                putString("repass", repass)
+                apply()
+            }
+            Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Enter Matching passwords", Toast.LENGTH_SHORT).show()
+            binding.name.text?.clear()
+            binding.email.text?.clear()
+            binding.password.text?.clear()
+            binding.repassword.text?.clear()
+        }
+    }
+
+    private fun initPref() {
+        sharedPreferences = getSharedPreferences("Login Details", Context.MODE_PRIVATE)
     }
 }
