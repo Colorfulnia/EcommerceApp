@@ -29,11 +29,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:background="@drawable/login"
-            android:hint="Enter name"
+            android:hint="Enter email"
             android:padding="15dp"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imageView" />
 
@@ -44,7 +43,7 @@
             android:textSize="20sp"
             android:padding="15dp"
             android:background="@drawable/login"
-            android:hint="Enter email"
+            android:hint="Enter name"
             app:layout_constraintTop_toBottomOf="@id/email"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -54,27 +53,28 @@
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:background="@drawable/login"
             android:hint="Enter the password"
             android:inputType="textPassword"
             android:padding="15dp"
             android:textSize="20sp"
-            tools:layout_editor_absoluteX="34dp"
-            tools:layout_editor_absoluteY="203dp"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            tools:layout_editor_absoluteX="20dp" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/repassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:background="@drawable/login"
             android:hint=" Re-Enter the password"
             android:inputType="textPassword"
             android:padding="15dp"
             android:textSize="20sp"
-            tools:layout_editor_absoluteX="20dp"
-            tools:layout_editor_absoluteY="280dp"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintTop_toBottomOf="@+id/password"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="20dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -87,13 +87,13 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-
             </CheckBox>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Please Check the User Agreement" />
+
         </LinearLayout>
 
         <Button

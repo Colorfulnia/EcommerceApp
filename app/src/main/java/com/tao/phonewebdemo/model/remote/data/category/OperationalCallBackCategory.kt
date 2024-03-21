@@ -1,4 +1,4 @@
-package com.tao.phonewebdemo.model.remote
+package com.tao.phonewebdemo.model.remote.data.category
 
 import com.tao.phonewebdemo.model.remote.data.category.CategoryResponse
 

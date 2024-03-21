@@ -8,8 +8,9 @@ import com.squareup.picasso.Picasso
 import com.tao.phonewebdemo.databinding.CategoryItemBinding
 import com.tao.phonewebdemo.model.remote.data.Constant.Constants.BASE_URL
 import com.tao.phonewebdemo.model.remote.data.category.CategoryData
+import com.tao.phonewebdemo.model.remote.data.subcategory.CommunicatorSubcategory
 
-class CategoryAdapter(context: Context, val categoryList: ArrayList<CategoryData>): RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+class CategoryAdapter(val categoryList: ArrayList<CategoryData>, private val c: CommunicatorSubcategory):RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
     inner class CategoryViewHolder(private val binding: CategoryItemBinding):RecyclerView.ViewHolder(binding.root){
         fun bind(categoryList: CategoryData){
             binding.categoryText.text=categoryList.categoryName
@@ -27,9 +28,17 @@ class CategoryAdapter(context: Context, val categoryList: ArrayList<CategoryData
         return CategoryViewHolder(binding)
     }
 
+
+
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val currentCategory = categoryList[position]
         holder.bind(currentCategory)
+
+        holder.itemView.setOnClickListener(){
+            var num=position+1
+            var url= num.toString()
+            c.sendSubCategory(url)
+        }
 
     }
 }

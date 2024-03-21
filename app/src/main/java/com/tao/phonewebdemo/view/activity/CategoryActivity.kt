@@ -1,5 +1,6 @@
 package com.tao.phonewebdemo.view.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,12 @@ class CategoryActivity : AppCompatActivity(), MVPCategory.CategoryView {
         presenter.fetchCategoryData()
 
         binding.recyclerViewCategory.layoutManager = GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
+    }
+
+    override fun sendSubCategory(url: String) {
+        val intent = Intent(this, SubCategoryActivity::class.java)
+        intent.putExtra("URL", url)
+        startActivity(intent)
     }
 
     override fun setResultCategory(categoryResponse: CategoryResponse) {

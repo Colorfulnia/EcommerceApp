@@ -1,6 +1,6 @@
 package com.tao.phonewebdemo.presenter.category
 
-import com.tao.phonewebdemo.model.remote.OperationalCallBackCategory
+import com.tao.phonewebdemo.model.remote.data.category.OperationalCallBackCategory
 import com.tao.phonewebdemo.model.remote.data.category.CategoryResponse
 import com.tao.phonewebdemo.model.remote.volleyhandler.VolleyCategoryHandler
 

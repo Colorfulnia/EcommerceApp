@@ -26,11 +26,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initHomeView() {
-        // home implementns in activity
         binding.homeMenu.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.categoryMenu -> {
                     val intent = Intent(this, CategoryActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.profileMenu -> {
+
+                    val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
                     true
                 }

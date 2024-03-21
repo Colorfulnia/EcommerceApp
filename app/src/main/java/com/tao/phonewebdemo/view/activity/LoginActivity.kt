@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.tao.phonewebdemo.R
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.widget.Toast
 import com.tao.phonewebdemo.databinding.ActivityLoginBinding
@@ -22,11 +23,11 @@ class LoginActivity : AppCompatActivity() {
         initPref()
 
         binding.login.setOnClickListener {
-            fetchDetails()
+            // fetchDetails()
+            startActivity(Intent(this, MainActivity::class.java))
         }
-
         binding.signUp1.setOnClickListener {
-
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 
@@ -38,8 +39,8 @@ class LoginActivity : AppCompatActivity() {
         val passVerf = sharedPreferences.getString("pass", "")
 
         if (email == emailVerf && password == passVerf) {
-            //  like startActivity(Intent(this, MainActivity::class.java))
             Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, MainActivity::class.java))
         } else {
             binding.email.text?.clear()
             binding.password.text?.clear()

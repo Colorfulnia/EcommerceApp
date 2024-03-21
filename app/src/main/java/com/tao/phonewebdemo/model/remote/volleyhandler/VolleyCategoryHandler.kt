@@ -7,7 +7,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.tao.phonewebdemo.model.remote.OperationalCallBackCategory
+import com.tao.phonewebdemo.model.remote.data.category.OperationalCallBackCategory
 import com.tao.phonewebdemo.model.remote.data.Constant.Constants.CATEGORY_URL
 import com.tao.phonewebdemo.model.remote.data.category.CategoryResponse
 
