@@ -2,7 +2,7 @@ package com.tao.phonewebdemo.presenter.category
 
 import com.tao.phonewebdemo.model.remote.data.category.CategoryResponse
 
-interface MVPCategory {
+interface CategoryMVP {
     interface CategoryPresenter{
         fun fetchCategoryData()
     }

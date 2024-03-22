@@ -6,7 +6,7 @@ import com.tao.phonewebdemo.model.remote.volleyhandler.ProductVolleyHandler
 
 class ProductPresenter(private val volleyHandler: ProductVolleyHandler, private val productView: ProductMVP.ProductView): ProductMVP.ProductPresenter {
 
-    override fun getProductDetail(productId: String): String {
+    override fun getProduct(productId: String): String {
         productView.onLoad(true)
         val message = volleyHandler.callProductDetailApiCall(productId,
             object : OperationalCallback {

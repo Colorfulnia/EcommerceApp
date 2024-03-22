@@ -2,23 +2,19 @@ package com.tao.phonewebdemo.view.activity
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.tao.phonewebdemo.R
-
 import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
 import com.tao.phonewebdemo.databinding.ActivityCategoryBinding
 import com.tao.phonewebdemo.model.remote.data.category.CategoryData
 import com.tao.phonewebdemo.model.remote.data.category.CategoryResponse
+import com.tao.phonewebdemo.model.remote.data.subcategory.CommunicatorSubcategory
 import com.tao.phonewebdemo.model.remote.volleyhandler.VolleyCategoryHandler
 import com.tao.phonewebdemo.presenter.category.CategoryPresenter
-import com.tao.phonewebdemo.presenter.category.MVPCategory
+import com.tao.phonewebdemo.presenter.category.CategoryMVP
 import com.tao.phonewebdemo.view.adapter.CategoryAdapter
 
-class CategoryActivity : AppCompatActivity(), MVPCategory.CategoryView {
+class CategoryActivity : AppCompatActivity(), CategoryMVP.CategoryView, CommunicatorSubcategory {
     private lateinit var binding: ActivityCategoryBinding
     private lateinit var presenter: CategoryPresenter
 
@@ -45,7 +41,7 @@ class CategoryActivity : AppCompatActivity(), MVPCategory.CategoryView {
         categoryResponse.categories.forEach { category ->
             categories.add(CategoryData(category.category_name, category.category_image_url))
         }
-        val categoryAdapter = CategoryAdapter(this, categories)
+        val categoryAdapter = CategoryAdapter(categories, this)
         binding.recyclerViewCategory.adapter = categoryAdapter
     }
 

@@ -10,6 +10,7 @@ import com.tao.phonewebdemo.model.remote.data.Constant.Constants.BASE_URL
 import com.tao.phonewebdemo.model.remote.data.category.CategoryData
 import com.tao.phonewebdemo.model.remote.data.subcategory.CommunicatorSubcategory
 
+
 class CategoryAdapter(val categoryList: ArrayList<CategoryData>, private val c: CommunicatorSubcategory):RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
     inner class CategoryViewHolder(private val binding: CategoryItemBinding):RecyclerView.ViewHolder(binding.root){
         fun bind(categoryList: CategoryData){

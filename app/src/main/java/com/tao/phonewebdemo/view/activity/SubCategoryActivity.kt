@@ -1,16 +1,20 @@
 package com.tao.phonewebdemo.view.activity
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.tabs.TabLayoutMediator
 import com.tao.phonewebdemo.R
 import com.tao.phonewebdemo.databinding.ActivitySubCategoryBinding
+import com.tao.phonewebdemo.model.remote.data.subcategory.SubCategoryResponse
 import com.tao.phonewebdemo.model.remote.data.subcategory.Subcategory
 import com.tao.phonewebdemo.model.remote.volleyhandler.SubCategoryVolleyHandler
 import com.tao.phonewebdemo.presenter.subcategory.SubCategoryMVP
 import com.tao.phonewebdemo.presenter.subcategory.SubCategoryPresenter
+import com.tao.phonewebdemo.view.adapter.SubCategoryViewPagerAdapter
 
 class SubCategoryActivity : AppCompatActivity(), SubCategoryMVP.SubCategoryView {
     private lateinit var binding: ActivitySubCategoryBinding
@@ -32,7 +36,7 @@ class SubCategoryActivity : AppCompatActivity(), SubCategoryMVP.SubCategoryView 
     }
 
     private fun setUpViewPager() {
-        val adapter = ViewPagerAdapter(this, subCategoryList)
+        val adapter = SubCategoryViewPagerAdapter(this, subCategoryList)
         binding.viewpager.adapter = adapter
     }
 

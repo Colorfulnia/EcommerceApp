@@ -6,8 +6,8 @@ import com.tao.phonewebdemo.model.remote.volleyhandler.VolleyCategoryHandler
 
 class CategoryPresenter(
     private val volleyCategoryHandler: VolleyCategoryHandler,
-    private val categoryView: MVPCategory.CategoryView
-): MVPCategory.CategoryPresenter {
+    private val categoryView: CategoryMVP.CategoryView
+): CategoryMVP.CategoryPresenter {
     override fun fetchCategoryData(){
         volleyCategoryHandler.makeApiCategoryCall(object : OperationalCallBackCategory {
             override fun onSuccess(categoryResponse: CategoryResponse) {

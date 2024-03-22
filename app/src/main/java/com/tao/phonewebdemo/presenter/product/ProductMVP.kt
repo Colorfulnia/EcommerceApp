@@ -2,7 +2,7 @@ package com.tao.phonewebdemo.presenter.product
 
 interface ProductMVP {
     interface ProductPresenter {
-        fun getProductDetail(productId: String): String
+        fun getProduct(productId: String): String
     }
 
     interface ProductView {
