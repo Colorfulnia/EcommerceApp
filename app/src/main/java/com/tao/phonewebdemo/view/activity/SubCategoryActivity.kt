@@ -62,3 +62,4 @@ class SubCategoryActivity : AppCompatActivity(), SubCategoryMVP.SubCategoryView 
         Log.i("SubCategoryActivity", isLoading.toString())
     }
 }
+
